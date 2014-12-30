@@ -1,13 +1,11 @@
-%if 0%{?fedora} >= 21
+%{?_javapackages_macros:%_javapackages_macros}
 %global java_pkg java-headless
-%else
-%global java_pkg java
-%endif
 
 Name:          typesafe-config
 Version:       1.2.0
-Release:       2%{?dist}
+Release:       2.1
 Summary:       Configuration library for JVM languages
+Group:         Development/Java
 License:       ASL 2.0
 URL:           https://github.com/typesafehub/config/
 Source0:       https://github.com/typesafehub/config/archive/v%{version}.tar.gz
@@ -51,9 +49,9 @@ sed -i -e '/useGpg/,+2d' build.sbt
 sed -i -e '/publishSigned/,+2d' build.sbt
 sed -i -e '/publishLocalSigned/,+2d' build.sbt
 
-sed -i -e 's/2[.]10[.][0-2]/2.10.3/' build.sbt
+sed -i -e 's/2[.]10[.][0-2]/2.10.4/' build.sbt
 
-sed -i -e 's/Some("1[.]6")/Some("1.7")/' project/JavaVersionCheck.scala
+sed -i -e 's/Some("1[.]6")/Some("1.8")/' project/JavaVersionCheck.scala
 
 for buildsbt in $(find . -name build.sbt) ; do
     (echo ; echo ; echo 'version := "%{version}"'; echo) >> $buildsbt
@@ -88,7 +86,7 @@ cp -rp config/target/api/* %{buildroot}%{_javadocdir}/%{name}
 %files
 %{_javadir}/%{name}.jar
 %{_mavenpomdir}/JPP-%{name}.pom
-%{_mavendepmapfragdir}/%{name}
+%{_datadir}/maven-metadata/*
 %doc LICENSE-2.0.txt NEWS.md README.md
 
 %files javadoc
