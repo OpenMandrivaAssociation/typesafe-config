@@ -3,7 +3,7 @@
 
 Name:          typesafe-config
 Version:       1.2.0
-Release:       2.2
+Release:       2.3
 Summary:       Configuration library for JVM languages
 Group:         Development/Java
 License:       ASL 2.0
